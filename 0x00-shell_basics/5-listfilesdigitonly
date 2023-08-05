@@ -1,4 +1,2 @@
 #!/bin/bash
-ls -l
-ls -l --numeric-uid-gid
 ls -la
