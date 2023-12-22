@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#Write a Bash script that displays, To infinity and beyond indefinitely
+
+
+sigterm_handle()
+{
+	echo "I am invincible!!!"
+	sig = true
+}
+
+trap sigterm_handle SIGTERM
+
+while true; do
+	 echo "To infinity and beyond"
+	 sleep 2
+ done
