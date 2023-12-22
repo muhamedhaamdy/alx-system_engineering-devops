@@ -5,7 +5,6 @@
 sigterm_handle()
 {
 	echo "I am invincible!!!"
-	sig = true
 }
 
 trap sigterm_handle SIGTERM
