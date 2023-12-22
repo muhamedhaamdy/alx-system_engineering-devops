@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Display header
+
+for pid in /proc/[0-9]*/; do
+    current_pid=$(basename "$pid")
+
+    # Check if cmdline file exists (contains the command line used to start the process)
+    if [ -e "$pid/cmdline" ]; then
+        process_name=$(tr -d '\0' < "$pid/cmdline")
+        
+        if [[ "$process_name" == *"bash"* ]]; then
+            echo "$current_pid   bash"
+        fi
+    fi
+done
