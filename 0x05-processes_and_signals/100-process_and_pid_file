@@ -7,6 +7,8 @@ if [ ! -e "$file" ]; then
   touch "$file"
 fi
 
+sleep 2 &
+
 echo $! > "$file"
 
 out_handle()
