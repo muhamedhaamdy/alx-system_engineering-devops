@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 #script that uses ssh to connect to your server
-cat ~/.ssh/school | ssh ubuntu@54.90.23.212 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+ssh -i ubuntu@54.90.23.212
