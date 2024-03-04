@@ -1,17 +1,30 @@
 #!/usr/bin/env bash
-# Install nginx
-sudo apt-get update
-sudo apt-get -y install nginx
+# Configure your Nginx server to have a custom 404 page
 
-# Create HTML page with Hello World!
-echo 'Hello World!' | sudo tee /var/www/html/index.nginx-debian.html
+apt-get update
+apt-get install -y nginx
 
-# Redirect
-sudo sed -i '/server_name _;/a \\n\tlocation /redirect_me {\n\t\treturn 301 https://x.com/Abdorithm;\n\t}' /etc/nginx/sites-available/default
+mkdir /etc/nginx/html
+touch /etc/nginx/html/index.html
+echo "Hello World!" > /etc/nginx/html/index.html
+touch /etc/nginx/html/404.html
+echo "Ceci n'est pas une page" > /etc/nginx/html/404.html
 
-# 404 custom
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
-sudo sed -i '/server_name _;/a \\n\terror_page 404 /404.html;' /etc/nginx/sites-available/default
+printf %s "server {
+    listen 80;
+    listen [::]:80 default_server;
+    root   /etc/nginx/html;
+    index  index.html index.htm;
 
-# Restart Nginx
-sudo service nginx restart
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+
+    error_page 404 /404.html;
+    location /404 {
+      root /etc/nginx/html;
+      internal;
+    }
+}" > /etc/nginx/sites-available/default
+
+service nginx restart
