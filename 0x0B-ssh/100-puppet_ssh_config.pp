@@ -1,11 +1,12 @@
-# palying with some configurations
+# make changes to config file using puppet
 
-$configuration = file('2-ssh_config')
+$content = 'Host 349756-web-01
+	HostName 35.175.104.84
+	User ubuntu
+	IdentityFile ~/.ssh/school
+	PasswordAuthentication no'
 
-#file {'etc/ssh/ssh_config':
-#  ensure  => file,
-#  content => $configuration,
-#}
-notify {'file message': 
-  message => $configuration
+file { '/etc/ssh/ssh_config':
+  ensure  => file,
+  content => $content,
 }
