@@ -1,1 +1,27 @@
-#
+#!/usr/bin/env bash
+#Installign and configure HAproxy on your lb-01 server
+
+$conf = 
+'
+frontend web-frontend
+  bind *:80
+  mode http
+
+  acl url_blog path_beg /blog
+  default_backend web-backend
+
+backend web-backend
+   balance roundrobin
+   server 438863-web-01 18.207.235.78:80 check
+   server 438863-web-02 52.91.125.237:80 check
+'
+
+
+apt-get install --no-install-recommends software-properties-common
+add-apt-repository ppa:vbernat/haproxy-2.4
+
+apt-get install haproxy=2.4.\*
+
+echo -e $conf | sudo tee -a /etc/haproxy/haproxy.cfg
+
+sudo service haproxy start
