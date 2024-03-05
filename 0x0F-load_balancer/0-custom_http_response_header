@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 #we want to add a custom Nginx response header
 
+sudo apt-get update -y -qq &&
+    sudo apt-get install nginx -y
+
+sudo service nginx start
+sudo ufw allow 'Nginx HTTP'
+
+echo -e "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
+
+sudo sed -i '/server_name _;/a \\n\tlocation /redirect_me {\n\t\treturn 301 https://github.com/SalahMSwefy;\n\t}' /etc/nginx/sites-available/default
+
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+sudo sed -i '/server_name _;/a \\n\terror_page 404 /404.html;' /etc/nginx/sites-available/default
+
 sudo sed -i '/server_name _;/a \\n\tadd_header X-Served-By $hostname;' /etc/nginx/sites-available/default
 sudo service nginx restart
