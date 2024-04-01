@@ -3,13 +3,15 @@
 import requests
 import sys
 
-def get_info(resource, params = None):
+
+def get_info(resource, params=None):
     '''get the the data from API'''
     url = 'https://jsonplaceholder.typicode.com/' + resource
     if params:
         url += ('?' + params[0] + '=' + params[1])
     req = requests.get(url)
     return req.json()
+
 
 if __name__ == '__main__':
     usr = get_info('users', ['id', sys.argv[1]])
