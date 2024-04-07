@@ -18,7 +18,7 @@ if __name__ == '__main__':
     usr = get_info('users', ['id', sys.argv[1]])
     todos = get_info('todos', ['userId', sys.argv[1]])
     tasks_formated = []
-    csv_file = 'USER_ID.csv'
+    csv_file = '{}.csv'.format(sys.argv[1])
     for k in todos:
         tasks_formated.append(
             [sys.argv[1], usr[0]['username'], k["completed"], k['title']])
