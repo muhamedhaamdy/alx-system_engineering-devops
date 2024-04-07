@@ -25,6 +25,6 @@ if __name__ == '__main__':
                             quoting=csv.QUOTE_ALL)
         for task in todos:
             writer.writerow([sys.argv[1],
-                            usr['username'],
+                            usr[0]['username'],
                             task['completed'],
                             task['title']])
