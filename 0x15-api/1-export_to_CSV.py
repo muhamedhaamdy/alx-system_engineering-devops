@@ -19,13 +19,16 @@ if __name__ == '__main__':
     todos = get_info('todos', ['userId', sys.argv[1]])
     tasks_formated = []
     csv_file = '{}.csv'.format(sys.argv[1])
-    with open(csv_filename, mode='w') as f:
+    for k in todos:
+        tasks_formated.append(
+            [sys.argv[1], usr[0]['username'], k["completed"], k['title']])
+    with open(csv_file, mode='w') as f:
         writer = csv.writer(f,
                             delimiter=',',
                             quotechar='"',
                             quoting=csv.QUOTE_ALL)
-        for task in tasks:
-            writer.writerow([user['id'],
-                            user['username'],
-                            task['completed'],
-                            task['title']])
+        for task in tasks_formated:
+            writer.writerow([task[0],
+                            task[1],
+                            task[2],
+                            task[3]])
