@@ -17,18 +17,14 @@ def get_info(resource, params=None):
 if __name__ == '__main__':
     usr = get_info('users', ['id', sys.argv[1]])
     todos = get_info('todos', ['userId', sys.argv[1]])
-    tasks_formated = []
     csv_file = '{}.csv'.format(sys.argv[1])
-    for k in todos:
-        tasks_formated.append(
-            [sys.argv[1], usr[0]['username'], k["completed"], k['title']])
     with open(csv_file, mode='w') as f:
         writer = csv.writer(f,
                             delimiter=',',
                             quotechar='"',
                             quoting=csv.QUOTE_ALL)
-        for task in tasks_formated:
-            writer.writerow([task[0],
-                            task[1],
-                            task[2],
-                            task[3]])
+        for task in todos:
+            writer.writerow([sys.argv[1],
+                            usr['username'],
+                            task['completed'],
+                            task['title']])
