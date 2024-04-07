@@ -20,8 +20,8 @@ if __name__ == '__main__':
     tasks_formated = []
     csv_file = 'USER_ID.csv'
     for k in todos:
-        tasks_formated.append([sys.argv[1], usr[0]['username'], k["completed"], k['title']])
+        tasks_formated.append(
+            [sys.argv[1], usr[0]['username'], k["completed"], k['title']])
     with open(csv_file, 'w', newline='') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerows(tasks_formated)
-
