@@ -7,12 +7,13 @@ import sys
 
 def get_info(resource, params=None):
     '''get the the data from API'''
-    url = 'https://jsonplaceholder.typicode.com/' + resource
-    if params:
-        url += ('?' + params[0] + '=' + params[1])
-    req = requests.get(url)
-    return req.json()
-
+    url = 'https://jsonplaceholder.typicode.com/'
+        url += resource
+        if param:
+            url += ('?' + param[0] + '=' + param[1])
+        r = requests.get(url)
+        r = r.json()
+        return r
 
 if __name__ == '__main__':
     usr = get_info('users', ['id', sys.argv[1]])
@@ -24,7 +25,7 @@ if __name__ == '__main__':
                             quotechar='"',
                             quoting=csv.QUOTE_ALL)
         for task in todos:
-            writer.writerow([sys.argv[1],
+            writer.writerow([usr[0]['id'],
                             usr[0]['username'],
                             task['completed'],
                             task['title']])
